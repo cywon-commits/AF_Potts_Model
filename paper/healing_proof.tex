@@ -1,0 +1,195 @@
+% Proof of the healing theorem (Theorem thm:healing-full, stated in Sec. healing of main.tex).
+% \input after \appendix in main.tex.  Graphs simple, maximum degree <= 3.
+
+\section{Proof of the healing theorem}
+\label{app:healing}
+We use graph-theoretic language: vertices, edges, degree, and 2-colourings, a frustrated bond being
+a monochromatic edge. For $X\subseteq V$ let $\varphi(X)=|X|+\fr(G-X)$.
+
+\emph{Proof of Theorem~\ref{thm:healing-full}.}
+\paragraph*{Preliminaries.}
+(F1) For every $X\subseteq V$, $\varphi(X):=|X|+\fr(G-X)\ge\fr(G)$: re-insert the vertices of $X$
+one at a time, each on the side opposite to the majority of its already present neighbours;
+since degrees are at most three, each insertion creates at most one monochromatic edge.
+In particular every odd cycle transversal has at least $\fr(G)$ vertices, so it suffices to
+find an independent $S$ with $\varphi(S)=\fr(G)$ and $\fr(G-S)=0$.
+An independent set $S$ is \emph{tight} if $\varphi(S)=\fr(G)$; the empty set is tight.
+Both $\fr$ and $\ioct$ are additive over connected components, so we may assume $G$
+connected and $G\ne K_4$. Fix a tight set $S$ of maximum size and suppose, for a
+contradiction, that $k:=\fr(G-S)\ge1$.
+
+\begin{lemma}[augmentation]\label{lem:aug}
+Let $S$ be tight and let $v$ be an endpoint of a monochromatic edge in some optimal
+2-colouring of $G-S$. If $v$ has no neighbour in $S$, then $S\cup\{v\}$ is tight.
+\end{lemma}
+\begin{proof}
+Deleting $v$ from that colouring removes at least one monochromatic edge, so
+$\fr(G-S-v)\le k-1$ and $\varphi(S\cup\{v\})\le\varphi(S)$; equality holds by (F1), and
+$S\cup\{v\}$ is independent.
+\end{proof}
+
+\begin{lemma}[stuck structure]\label{lem:stuck}
+Let $T$ be a tight set of maximum size. Every component $K$ of $G-T$ with $\fr(K)\ge1$ is an odd
+cycle, and each vertex of $K$ has degree three in $G$ and exactly one neighbour in $T$.
+\end{lemma}
+\begin{proof}
+Take an optimal colouring of $G-T$ and a monochromatic edge $uv$ in $K$. By
+Lemma~\ref{lem:aug} and maximality $v$ has a neighbour in $T$, so $\deg_K v\le2$. If
+$\deg_K v=1$, recolouring $v$ improves the colouring. Hence $v$ has a second neighbour $v_1$
+in $K$, of the other colour (otherwise recolouring $v$ gains two). Recolouring $v$ gives another
+optimal colouring in which $v v_1$ is the monochromatic edge, so $v_1$ has the same properties.
+Iterating gives a walk $v=v_0,v_1,v_2,\dots$ in which each $v_i$ has degree exactly two in $K$
+and $v_{i+1}$ is the neighbour of $v_i$ other than $v_{i-1}$ ($v_{-1}=u$). By symmetry $u$ also has
+degree two. Let $v_m$ be the first vertex of the walk whose successor was already visited or is
+$u$; since all visited vertices have both neighbours accounted for, the successor must be $u$, so
+$u,v_0,\dots,v_m$ is a cycle in which every vertex has degree two in $K$. As $K$ is connected,
+$K$ is this cycle, odd because $\fr(K)\ge1$. Each vertex of $K$ has a neighbour in $T$ and degree at most
+three, hence exactly one such neighbour and degree three.
+\end{proof}
+
+\begin{lemma}[exchange]\label{lem:exchange}
+Let $T$ be a tight set of maximum size, $Y$ an odd-cycle component of $G-T$, $y\in Y$ and $t$ the
+neighbour of $y$ in $T$. Then
+(a) $\deg t=3$ and $y$ is the only neighbour of $t$ on $Y$;
+(b) the other two neighbours of $t$ are the endpoints of a component $Q$ of $G-T$ which is a path
+with an even number of vertices;
+(c) $T'=T-t+y$ is a tight set of maximum size and $Q+t$ is an odd-cycle component of $G-T'$.
+In particular distinct vertices of $Y$ have distinct neighbours in $T$.
+\end{lemma}
+\begin{proof}
+$T'$ is independent, since the neighbours of $y$ other than $t$ lie on $Y$. Removing $y$ turns $Y$
+into a path, so $\fr(G-T-y)=k-1$; adding back $t$, which has at most two neighbours in
+$G-T'$, creates at most one monochromatic edge. Thus $\fr(G-T')\le k$, and by (F1) $T'$ is tight;
+it has maximum size, so Lemma~\ref{lem:stuck} applies to $T'$.
+If $t$ had a neighbour on another odd-cycle component $Y_2$ of $G-T$, the component of $G-T'$
+containing $Y_2$ would be frustrated but contain a vertex of degree three, contradicting
+Lemma~\ref{lem:stuck}. Hence the component $D$ of $t$ in $G-T'$ satisfies
+$\fr(G-T')=(k-1)+\fr(D)$, so $\fr(D)=1$ and, by Lemma~\ref{lem:stuck}, $D$ is an odd cycle all of
+whose vertices have degree two in $G-T'$. Thus $t$ has exactly two neighbours $t_1,t_2$ in
+$G-T'$, $\deg t=3$, and $W=D-t$ is a component of $G-T-y$ which is a $t_1$--$t_2$ path with an
+even number of vertices.
+If $W=Y-y$, then $t$ is adjacent to both neighbours $y^\pm$ of $y$ on $Y$, and $t$ is the unique
+$T$-neighbour of $y^+$. Applying the same argument to $y^+$ shows that the two neighbours of $t$
+other than $y^+$ are the neighbours of $y^+$ on $Y$, i.e.\ $\{y,y^-\}=\{y,y^{++}\}$. Hence $|Y|=3$
+and $Y\cup\{t\}$ induces a $K_4$ whose vertices all have degree three, so $G=K_4$, excluded.
+Otherwise $W$ is a component of $G-T$ other than $Y$; it is not an odd cycle, so $W=Q$ is a
+path component as claimed, and (a)--(c) follow.
+\end{proof}
+
+\paragraph*{Chains.}
+Let $Z$ be an odd-cycle component of $G-S$. A \emph{chain} is a sequence defined by
+$T_0=S$, $R_0=Z$, and for $j\ge0$: choose $p_{j+1}\in R_j$ (so $p_{j+1}\ne w_j$ for $j\ge1$), let $w_{j+1}$ be the
+$T_j$-neighbour of $p_{j+1}$, let $R_{j+1}$ be the path given by Lemma~\ref{lem:exchange} applied
+to $(T_j,\,Y_j,\,p_{j+1})$ with $Y_0=Z$ and $Y_j=R_j+w_j$, and set $T_{j+1}=T_j-w_{j+1}+p_{j+1}$.
+Write $W_j=\{w_1,\dots,w_j\}\subseteq S$ and $P_j=\{p_1,\dots,p_j\}$, so $T_j=(S\setminus W_j)\cup P_j$.
+
+\begin{lemma}[chain invariant]\label{lem:chain}
+For every chain and every $j\ge1$:
+(I1) $T_j$ is a tight set of maximum size and $Y_j=R_j+w_j$ is an odd-cycle component of $G-T_j$;
+(I2) $R_j$ is a component of $G-S$, distinct from $Z,R_1,\dots,R_{j-1}$;
+(I3) every vertex of a component of $G-S$ other than $Z,R_1,\dots,R_j$ has the same neighbours
+in $T_j$ as in $S$; in particular the $S$-neighbours of a vertex of $R_j$ are its unique
+$T_j$-neighbour together with $w_j$ if it is an endpoint of $R_j$.
+\end{lemma}
+\begin{proof}
+Induction on $j$; (I1) is Lemma~\ref{lem:exchange}(c). Assume the claims up to $j$. The components
+of $G-T_j$ are: (i) the components of $G-S$ other than $Z,R_1,\dots,R_j$; (ii) the path $Z-p_1$
+and the paths $\rho_i=Y_i-p_{i+1}$, $1\le i<j$; (iii) the odd cycle $Y_j$.
+Note $N(p_i)\subseteq R_{i-1}\cup\{w_{i-1},w_i\}$ and $N(w_i)=\{p_i\}\cup\{\text{endpoints of }R_i\}$.
+
+\emph{$w_{j+1}\in S\setminus W_j$.} Otherwise $w_{j+1}=p_i$ with $i\le j$ would be adjacent to
+$p_{j+1}\in R_j$; but $p_{j+1}\notin R_{i-1}$ by (I2) and $p_{j+1}\notin S$.
+
+\emph{$R_{j+1}$ is of type (i).} It is a path, so not $Y_j$. It is not $Z-p_1$: its closing vertex
+$w_{j+1}\in S$ would be adjacent to both neighbours $z^\pm$ of $p_1$ on $Z$, i.e.\ equal to both
+of their (distinct, Lemma~\ref{lem:exchange}) $S$-neighbours. It is not $\rho_i$: if both endpoints
+$y,y'$ of $\rho_i$ lie in $R_i$, then $w_{j+1}\in S\setminus W_j\subseteq T_i$ is the
+$T_i$-neighbour of $y\in Y_i$ and is adjacent to $y'\in Y_i$, contradicting
+Lemma~\ref{lem:exchange}(a) at stage $i$; otherwise one endpoint is $w_i\in S$, and $w_{j+1}\in S$
+cannot be adjacent to it because $S$ is independent.
+
+Hence $R_{j+1}$ is a component of $G-S$ distinct from $Z,R_1,\dots,R_j$, giving (I2). For (I3):
+a vertex of a type-(i) component is not adjacent to any $p_i$ or $w_i$ by the neighbourhood
+description above, so its $T_{j+1}$- and $S$-neighbourhoods coincide; the statement about $R_{j+1}$
+follows from (I1) for $T_{j+1}$ (each vertex of $Y_{j+1}$ has exactly one $T_{j+1}$-neighbour) and
+$T_{j+1}=T_j-w_{j+1}+p_{j+1}$.
+\end{proof}
+
+\paragraph*{Conclusion.}
+Every chain can be extended: $R_j$ is non-empty, so some $p_{j+1}\in R_j$ exists, and
+Lemma~\ref{lem:exchange} applies to $(T_j,Y_j,p_{j+1})$ because $T_j$ is a tight set of maximum
+size (I1) and $G\ne K_4$. By (I2) the paths $R_1,R_2,\dots$ of an infinite chain are pairwise
+distinct components of the finite graph $G-S$, a contradiction. Hence $\fr(G-S)=0$ for a maximum
+tight set $S$, which is therefore an independent odd cycle transversal of size $\fr(G)$.
+
+\paragraph*{Energy.} For $0<D_3\le1$ Theorem~\ref{thm:sandwich} and $\ioct=\fr$ give
+$\OPT=D_3\fr$. For $D_3\ge1$, $\OPT\le\fr$ (no state 3) and
+$E=m_{12}+e(S)+D_3|S|\ge m_{12}+|S|\ge\fr$ by the re-insertion argument. For $D_3=0$ the
+independent odd cycle transversal gives a proper 3-colouring, $\OPT=0$. \hfill$\square$
+
+
+
+\paragraph*{Remarks.} Planarity is not used. The argument does not fix a maximum cut, consistent
+with the fact that not every maximum cut is healable (Appendix~\ref{app:numerics}). For planar $G$
+the theorem makes $\OPT(D_3)$ computable in polynomial time for all $D_3$.
+
+\subsection*{Constructive version}
+Call a tight set $T$ \emph{augmentable} if $T+v$ is independent and tight for some $v$, and
+\emph{stuck} otherwise. The tight sets of size $s$ are all stuck if and only if no tight set of
+size $s+1$ exists (removing any vertex from a tight set of size $s+1$ leaves an augmentable tight
+set of size $s$), so ``maximum size'' in the proof above is the statement that all tight sets of
+size $|S|$ are stuck. The proof, however, uses this only for explicitly given sets: the current
+set $T_j$ of a chain and the sets $T_j-t+y$ obtained by exchanging a vertex $y$ of the odd cycle
+$Y_j$ with its $T_j$-neighbour $t$ (Lemma~\ref{lem:stuck} and Lemma~\ref{lem:exchange} applied to
+them, including the exchanges at $y^\pm$ and at $z^\pm$ and the one used in the proof of (I2)).
+This gives:
+
+\begin{proposition}\label{prop:constructive}
+Let $G\ne K_4$ be connected of maximum degree at most three, and let $S$ be a stuck tight set
+with $\fr(G-S)\ge1$. Run the chain from an odd-cycle component $Z$ of $G-S$, and at each stage $j$
+test all exchanges $T_j-t+y$, $y\in Y_j$. Within at most $c$ stages, $c$ the number of components
+of $G-S$, one of these exchanges is an augmentable tight set of size $|S|$.
+\end{proposition}
+\begin{proof}
+If none is augmentable, every set to which the proof applies maximality is stuck, so
+Lemmas~\ref{lem:stuck}--\ref{lem:chain} and the conclusion hold verbatim with ``maximum size''
+replaced by ``stuck'', and (I2) bounds the length of the chain by $c$, while the conclusion
+extends it; a contradiction.
+\end{proof}
+
+Hence the following procedure constructs an independent odd cycle transversal of size $\fr(G)$:
+starting from $S=\emptyset$, add a vertex whenever $S$ is augmentable, and when $S$ is stuck with
+$\fr(G-S)\ge1$ move to an augmentable tight set of the same size by
+Proposition~\ref{prop:constructive}. Each of the $\fr(G)$ rounds uses $O(|V|^2)$ evaluations of
+$\fr$ on subgraphs of $G$, so on planar lattices the ground state itself, not only its energy, is
+obtained in polynomial time. The exchange step is necessary: pure greedy augmentation gets stuck
+with $\fr(G-S)\ge1$ on some graphs with 12 vertices (e.g.\ the planar graph with graph6 code
+\verb+K?`D@`ae?iH_+ and $S=\{4,8,10\}$), although never on graphs with at most 11 vertices.
+
+\begin{corollary}\label{cor:one-ground-state}
+Given one optimal 2-colouring (Ising ground state) of $G$, an independent odd cycle transversal of
+size $\fr(G)$, and hence a ground state for every $D_3$, is obtained in polynomial time without
+any further maximum-cut computation.
+\end{corollary}
+\begin{proof}
+Maintain a tight set $S$ together with an optimal colouring $c$ of $G-S$, $k=\fr(G-S)$.
+\emph{Augmentation or certificate.} From a monochromatic edge $uv$ follow the walk in the proof of
+Lemma~\ref{lem:stuck}, recolouring as there, which keeps $c$ optimal. Either it meets a vertex $x$
+without neighbour in $S$; $x$ is an endpoint of a monochromatic edge of $c$, so $S+x$ is tight
+(Lemma~\ref{lem:aug}), and $c$ restricted to $G-S-x$ has at most $k-1$ monochromatic edges while
+$\fr(G-S-x)\ge k-1$ by (F1), so it is optimal. Or the walk closes and certifies that the component
+is an odd cycle all of whose vertices have a neighbour in $S$. If every frustrated component is
+certified, $S$ is stuck: every other vertex either has a neighbour in $S$ or lies in a bipartite
+component, whose removal does not lower $\fr(G-S)$.
+\emph{Exchange.} For $T'=T-t+y$ as in Lemma~\ref{lem:exchange}, colour the path $Y-y$ properly and
+give $t$ the colour opposite to the majority of its at most two neighbours in $G-T'$. This colouring
+of $G-T'$ has at most $(k-1)+1$ monochromatic edges and is optimal because $T'$ is tight.
+Thus the procedure after Proposition~\ref{prop:constructive} runs on colourings alone; each walk,
+exchange and certificate takes linear time, so the total time is polynomial.
+\end{proof}
+
+For planar lattices the Ising ground state is a minimum $T$-join; the healing step itself then
+takes about one second for $4\times10^3$ sites in our implementation, a small fraction of the
+matching time (Appendix~\ref{app:numerics}). Unlike the 2-SAT certificate of Sec.~\ref{sec:healing}, which may fail for a particular Ising
+ground state, this procedure always succeeds.
+
