@@ -38,9 +38,10 @@ state carries a single-ion energy cost $D_3$, on arbitrary lattices, and show th
 difficulty of the ground-state problem is controlled by the maximum coordination $\Delta$ alone;
 on planar lattices with $\Delta\le5$ it is classified completely.
 On lattices with coordination at most three the third state heals frustrated bonds one for one:
-we prove that every graph of maximum degree three other than $K_4$ has an independent set of sites
-that meets every odd cycle and whose size equals the number $\fr$ of frustrated bonds of the Ising
-ground state.
+every graph of maximum degree three other than $K_4$ has an independent set of sites that meets
+every odd cycle and whose size equals the number $\fr$ of frustrated bonds of the Ising ground
+state. This identity also follows from known results on the chromatic vertex stability of graphs;
+we give a constructive proof.
 Hence $\OPT(D_3)=\min(D_3,1)\,\fr$ for all $D_3$, computable in polynomial time on planar
 lattices. In graph-theoretic terms, independent odd cycle transversal is solvable in polynomial
 time on planar subcubic graphs.
@@ -50,7 +51,7 @@ The boundary is set by a local principle: a site of coordination $d$ in the thir
 at most $\lfloor d/2\rfloor$ frustrated bonds, so the third state is useless once
 $D_3\ge\lfloor\Delta/2\rfloor$; this threshold is sharp for every $\Delta\ge3$ and reproduces
 the triangular-lattice point $D_3^*=3$ of the equivalent spin-1 Blume--Capel antiferromagnet.
-The proof is constructive: from a single Ising ground state an exact ground state is built in
+From a single Ising ground state the proof builds an exact ground state in
 polynomial time, which for quasicrystalline, foam-like and defective lattices with thousands of
 sites takes seconds to minutes.
 \end{abstract}
@@ -94,12 +95,14 @@ Our results are as follows.
 (i) \emph{Coordination three is easy.} On lattices with coordination at most three ($\Delta\le3$)
 the third state heals frustrated bonds one for one, $E_0(D_3)\ge\min(D_3,1)\fr$
 (Theorem~\ref{thm:sandwich} and Appendix~\ref{app:healing}), and
-we prove that equality holds on every such lattice except $K_4$: every graph of maximum degree
+equality holds on every such lattice except $K_4$: every graph of maximum degree
 three other than $K_4$ has an independent odd cycle transversal of size $\fr$
 (Theorem~\ref{thm:healing-full}); $K_4$ can only occur as an isolated component
 (Remark~\ref{rem:K4}). The ground-state energy of a planar lattice with $\Delta\le3$ is therefore
-computable in polynomial time for every $D_3$, and the proof yields the ground state itself from a
-single Ising ground state (Corollary~\ref{cor:one-ground-state}).
+computable in polynomial time for every $D_3$. The identity $\ioct=\fr$ also follows by combining
+two results of Akbari \emph{et al.} on the chromatic vertex stability number~\cite{Akbari2022}
+(Sec.~\ref{sec:healing}); our proof is constructive and yields the ground state itself from a
+single Ising ground state in polynomial time (Corollary~\ref{cor:one-ground-state}).
 (ii) \emph{Coordination four is hard.} On planar lattices with $\Delta=4$ the ground-state
 problem is NP-complete for every fixed $0\le D_3<2$ (Theorem~\ref{thm:hard4}) and polynomial for
 $D_3\ge2$.
@@ -380,7 +383,18 @@ graphs with 12 sites.
 \paragraph*{Relation to earlier results.}
 For $\Delta\le3$, Choi, Nakajima and Rim showed that the minimum number of vertices whose removal
 leaves a bipartite graph equals $\fr(G)$~\cite{Choi1989}; Theorem~\ref{thm:healing-full}
-strengthens this by requiring the removed vertices to be independent. $K_4$ is also the
+requires in addition the removed vertices to be independent. In the language of chromatic
+stability, for a graph with chromatic number $\chi=3$ the quantities $\fr(G)$, the minimum odd cycle
+transversal and $\ioct(G)$ are the minimum numbers of edges, of vertices and of independent
+vertices whose removal lowers $\chi$ by one. Akbari \emph{et al.} proved that the two vertex
+numbers coincide whenever $\chi\in\{\Delta,\Delta+1\}$, and that the vertex and edge numbers
+coincide whenever $\chi>\Delta/2+1$~\cite{Akbari2022}. For $\Delta=3$ the second result is that of
+Choi, Nakajima and Rim, and together the two imply Theorem~\ref{thm:healing-full}. Their argument
+is existential, based on an extremal choice of the deletion set. The chain-and-exchange proof of
+Appendix~\ref{app:healing} uses extremality only for explicitly given sets and is therefore
+algorithmic (Proposition~\ref{prop:constructive}, Corollary~\ref{cor:one-ground-state}). The
+condition $\chi>\Delta/2+1$ is the condition $\lfloor\Delta/(\chi-1)\rfloor\le1$ of the
+re-insertion bound used in Theorem~\ref{thm:sandwich}. $K_4$ is also the
 exception in Brooks' theorem~\cite{Brooks1941}. Chen, Li and Wang bounded the frustration index of
 signed subcubic graphs, giving $\fr(G)\le|V|/3\le\alpha(G)$ for 2-edge-connected $G\ne K_4$ up to
 finitely many small exceptions~\cite{ChenLiWang2025}, consistent with the theorem. The theorem
@@ -534,7 +548,25 @@ and Theorem~\ref{thm:hard4}) and polynomial for $D_3\ge2$. Coordination three an
 opposite sides, and the threshold $\lfloor\Delta/2\rfloor$ is the exact complexity boundary for
 $\Delta\le5$. At coordination three healing makes the problem easy; at coordination four it does
 not, because a state-3 site can relieve two bonds and the choice of which sites to use carries
-information.
+information. The independence of state-3 sites, forced below the threshold by
+Theorem~\ref{thm:local}, also has a cost at coordination four: there are infinitely many graphs
+with $\Delta=4$ and $\chi=3$ for which the smallest independent set whose removal leaves a
+bipartite graph is larger than the smallest odd cycle transversal~\cite{Knor2022}.
+
+\paragraph*{More states.} The structure of Theorem~\ref{thm:healing-full} persists for $q$ states
+of which one is costly, $E(s)=\sum_{\langle uv\rangle}\delta_{s_us_v}+D_q\,\#\{u:s_u=q\}$. If
+$\Delta\le q$ and no component is $K_{q+1}$, then $\OPT(D_q)=\min(D_q,1)\,\fr_{q-1}(G)$, where
+$\fr_{q-1}$ is the minimum number of monochromatic bonds of a $(q-1)$-colouring. The lower bound is
+the re-insertion argument of Theorem~\ref{thm:sandwich}, since a site of degree at most $q$ placed
+in the rarest of $q-1$ states creates at most $\lfloor q/(q-1)\rfloor=1$ frustrated bond, and the
+matching independent transversal exists by the results of Ref.~\cite{Akbari2022} (by Brooks'
+theorem $\chi\le q$, and if $\chi=q$ both conditions above hold). We checked the identity
+exhaustively for all connected graphs with $\Delta\le4$ on at most 10 vertices ($q=4$) and with
+$\Delta\le5$ on at most 8 vertices ($q=5$). The argument of Appendix~\ref{app:healing} appears to
+carry over, with odd cycles replaced by $K_q$ and even paths by $K_{q-1}$; we do not give the
+details here. For $q\ge4$, however, computing $\fr_{q-1}$ is itself NP-hard (it contains planar
+3-colourability at $\Delta=4$~\cite{GareyJohnsonStockmeyer1976}), so the structural statement
+generalises but the polynomial algorithm does not.
 
 \paragraph*{A cost is not a field.} Barahona showed that a magnetic field turns the planar Ising
 ground-state problem from polynomial into NP-hard~\cite{Barahona1982}. The third-state cost looks
@@ -546,9 +578,11 @@ symmetry-breaking that the cost itself enforces. When the problem is formulated 
 Boolean constraint satisfaction problem (CSP), its symmetric structure places it close to the
 tractable side of the planar CSP classification~\cite{KazdaKolmogorovRolinek2018,FullaZivny2017}.
 
-\paragraph*{Independent odd cycle transversal.} Theorem~\ref{thm:healing-full} implies that
-independent odd cycle transversal is solvable in polynomial time on planar subcubic graphs. This
-differs from a statement made in the text following Theorem~11 of Ref.~\cite{Johnson2025}, that
+\paragraph*{Independent odd cycle transversal.} Theorem~\ref{thm:healing-full}, or equivalently
+the results of Ref.~\cite{Akbari2022} published in 2022, together with planar maximum
+cut~\cite{Hadlock1975}, implies that independent odd cycle transversal is solvable in polynomial
+time on planar subcubic graphs; Corollary~\ref{cor:one-ground-state} also constructs the
+transversal. This differs from a statement made in the text following Theorem~11 of Ref.~\cite{Johnson2025}, that
 the problem is NP-complete on planar subcubic graphs. That theorem itself concerns hardness on
 subcubic graphs without planarity and is consistent with our result; the difference concerns only
 the planarity of the constructed graphs. See the Supplemental Material~\cite{SM} for the detailed

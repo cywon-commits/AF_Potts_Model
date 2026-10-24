@@ -71,6 +71,7 @@ the Supplemental Material must be compiled first.
 | Constructive version: stuck sets first at 12 vertices | `python3 checks/constructive_stuck_search.py geng "-c -D3" 12` | printed |
 | Constructive version: exchange chains | `python3 checks/constructive_deep_chain.py SEED NGRAPHS NMAX` | printed |
 | One Ising ground state suffices (corollary) | `python3 checks/constructive_single_groundstate.py geng "-c -D3" 12 3` and `... lattices 5` | printed |
+| q states, one costly (Sec. VIII, "More states"): ioct_{q-1} = fr_{q-1} | `nauty-geng -cq -D4 N \| python3 checks/healing_general_q.py 4` (N ≤ 10); `nauty-geng -cq -D5 N \| python3 checks/healing_general_q.py 5` (N ≤ 8) | printed |
 | Constructive procedure: timing on lattices | `python3 constructive_heal.py timing` | printed |
 | Certification algorithm: Table I, Fig. 7 | `python3 timing_cert.py > runs/timing_cert.jsonl` | `runs/timing_cert.jsonl` |
 | Δ = 4 hardness: satisfiable formulas | `python3 cnr_reduction.py SEED COUNT` | printed |

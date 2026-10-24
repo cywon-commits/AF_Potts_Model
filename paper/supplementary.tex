@@ -56,6 +56,18 @@ larger degree the inequality can fail; the wheel $W_4$ has $\ioct=1<2=\fr$.)
 Every graph of maximum degree at most three without a $K_4$ component satisfies $\ioct(G)=\fr(G)$.
 \end{theorem}
 
+Theorem~\ref{thm:S-heal} is not only a result of the main text: it also follows from two theorems
+of Akbari \emph{et al.}~\cite{Akbari2022}, published in 2022. Let $\chi$ be the chromatic number
+and $\Delta$ the maximum degree. Their Theorem~1.1 states that if $\chi\in\{\Delta,\Delta+1\}$ the
+minimum number of vertices whose deletion lowers $\chi$ by one is attained by an independent set,
+and their Theorem~4.1 that if $\chi>\Delta/2+1$ it equals the minimum number of edges whose
+deletion lowers $\chi$ by one. For a graph of maximum degree three without a $K_4$ component,
+$\chi\le3$ by Brooks' theorem~\cite{Brooks1941}; if $\chi=3$ both conditions hold (with
+$\Delta\in\{2,3\}$), and the three numbers are $\ioct(G)$, the minimum odd cycle transversal and
+$\fr(G)$, so $\ioct(G)=\fr(G)$. If $\chi\le2$ both sides vanish. The polynomial-time argument below therefore
+rests only on results published before Ref.~\cite{Johnson2025} together with planar maximum cut; the
+proof in the main text adds a construction of the transversal.
+
 In Ref.~\cite{Johnson2025} the problem is defined as deciding whether a graph has an independent
 odd cycle transversal of size at most $k$ for a given integer $k$ (p.~445). Theorem~11 there reads:
 ``List Colouring, Odd Cycle Transversal and Independent Odd Cycle Transversal are C123-problems''
@@ -73,15 +85,17 @@ minimum $T$-join in the dual~\cite{Hadlock1975,Barahona1982}). By Theorem~\ref{t
 question ``$\ioct(G)\le k$?'' on a planar graph of maximum degree three has the answer yes if and
 only if $G$ has no $K_4$ component and $\fr(G)\le k$. (A $K_4$ component admits no IOCT; $\ioct$
 and $\fr$ are additive over components; vertices of degree below three are covered by the
-theorem.) The question is therefore decidable in polynomial time. If the problem were also
+theorem.) The question is therefore decidable in polynomial time, by Theorem~\ref{thm:S-heal} or
+equivalently by Ref.~\cite{Akbari2022} combined with planar maximum cut. If the problem were also
 NP-complete on this class, P would equal NP.
 
 The same construction is used in Ref.~\cite{Johnson2025} for (not necessarily independent) Odd
 Cycle Transversal. For that problem, polynomial-time solvability on planar subcubic graphs already
 follows from Theorem~1 of Choi, Nakajima and Rim~\cite{Choi1989}, which states that for graphs of
 maximum degree three the minimum odd cycle transversal (vertex bipartization) has the same size as
-the minimum edge bipartization, $\fr(G)$, combined with planar maximum cut. Theorem~\ref{thm:S-heal}
-strengthens that result by requiring the transversal to be independent. We make no statement
+the minimum edge bipartization, $\fr(G)$, combined with planar maximum cut; for $\Delta=3$ this is also the case of Theorem~4.1 of
+Ref.~\cite{Akbari2022}. Theorem~\ref{thm:S-heal} requires in addition the transversal to be
+independent. We make no statement
 about the other problems treated with the same construction.
 
 \subsection*{A.2 Points of agreement}
@@ -267,8 +281,8 @@ NP-completeness of IOCT on general subcubic graphs is consistent with Theorem~\r
 graph: it fails for the instances of Table~\ref{tab:S-inst} under every clause and literal order
 (Lemma~\ref{lem:S-minor}), and for constructions with features (P0)--(P3) it can hold only on
 formulas whose satisfiability is decidable in polynomial time (Sec.~A.6).
-\item Theorem~\ref{thm:S-heal} gives a polynomial algorithm for IOCT on planar subcubic graphs. Its
-proof is independent of the above; it is supported by computational checks: exhaustive to 12
+\item Theorem~\ref{thm:S-heal}, which also follows from Ref.~\cite{Akbari2022}, gives a polynomial
+algorithm for IOCT on planar subcubic graphs. Its proof is independent of the above; it is supported by computational checks: exhaustive to 12
 vertices, and exact optimisation on 251 graphs of 14--60 vertices, including reduction graphs
 $G^{\rm J}_\varphi$, and on 1\,386 further graphs of 16--100 vertices (main text, Appendix~A).
 \end{enumerate}
