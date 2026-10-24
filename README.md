@@ -25,8 +25,11 @@ Python 3.10 or later. Some checks enumerate graphs with `nauty-geng` (Debian/Ubu
 TeX Live with REVTeX 4.2 (`texlive-publishers`):
 
 ```
-cd paper && latexmk -pdf main.tex && latexmk -pdf supplementary.tex
+cd paper && latexmk -pdf supplementary.tex && latexmk -pdf main.tex
 ```
+
+`main.tex` appends the compiled `supplementary.pdf` after its references (package `pdfpages`), so
+the Supplemental Material must be compiled first.
 
 ## Layout
 

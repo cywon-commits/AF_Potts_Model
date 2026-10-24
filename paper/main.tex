@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{upquote}
+\usepackage{pdfpages}
 \usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}
@@ -672,5 +673,9 @@ were computed on $0\le D_3\le3$ for patches of 97--248 rhombi.
 \input{healing_proof}
 
 \bibliography{refs}
+
+% Supplemental Material, compiled separately from supplementary.tex, is appended here.
+\clearpage
+\includepdf[pages=-]{supplementary.pdf}
 
 \end{document}
