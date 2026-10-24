@@ -28,7 +28,7 @@ TeX Live with REVTeX 4.2 (`texlive-publishers`):
 cd paper && latexmk -pdf supplementary.tex && latexmk -pdf main.tex
 ```
 
-`main.tex` appends the compiled `supplementary.pdf` after its references (package `pdfpages`), so
+`main.tex` appends the pages of the compiled `supplementary.pdf` after its references (with `graphicx`), so
 the Supplemental Material must be compiled first.
 
 ## Layout

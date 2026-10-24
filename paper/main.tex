@@ -2,7 +2,6 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{upquote}
-\usepackage{pdfpages}
 \usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}
@@ -674,8 +673,26 @@ were computed on $0\le D_3\le3$ for patches of 97--248 rhombi.
 
 \bibliography{refs}
 
+\makeatletter
 % Supplemental Material, compiled separately from supplementary.tex, is appended here.
+% Each page of supplementary.pdf is placed full-size on its own page with graphicx only
+% (the package pdfpages conflicts with the REVTeX output routine).
 \clearpage
-\includepdf[pages=-]{supplementary.pdf}
+\onecolumngrid
+\newcount\supppage
+\newcount\supppages
+\pdfximage{supplementary.pdf}\supppages=\pdflastximagepages
+\supppage=0
+\loop\ifnum\supppage<\supppages
+  \advance\supppage by 1
+  \clearpage\thispagestyle{empty}%
+  \noindent\begingroup\setlength{\unitlength}{1pt}%
+  \begin{picture}(0,0)%
+    \put(\strip@pt\dimexpr-1in-\hoffset-\oddsidemargin\relax,%
+         \strip@pt\dimexpr1in+\voffset+\topmargin+\headheight+\headsep-\paperheight\relax)%
+        {\includegraphics[page=\the\supppage,width=\paperwidth,height=\paperheight]{supplementary.pdf}}%
+  \end{picture}\endgroup
+\repeat
+\makeatother
 
 \end{document}
