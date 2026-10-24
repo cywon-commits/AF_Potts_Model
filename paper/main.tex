@@ -557,20 +557,13 @@ bipartite graph is larger than the smallest odd cycle transversal~\cite{Knor2022
 generally, for $3\le\Delta\le10$ the condition $\chi\ge\Delta$ under which an optimal deletion set
 can be taken independent cannot be weakened~\cite{Cambie2024}.
 
-\paragraph*{More states.} The structure of Theorem~\ref{thm:healing-full} persists for $q$ states
-of which one is costly, $E(s)=\sum_{\langle uv\rangle}\delta_{s_us_v}+D_q\,\#\{u:s_u=q\}$. If
+\paragraph*{More states.} The same structure holds for $q$ states of which one is costly: if
 $\Delta\le q$ and no component is $K_{q+1}$, then $\OPT(D_q)=\min(D_q,1)\,\fr_{q-1}(G)$, where
 $\fr_{q-1}$ is the minimum number of monochromatic bonds of a $(q-1)$-colouring. The lower bound is
-the re-insertion argument of Theorem~\ref{thm:sandwich}, since a site of degree at most $q$ placed
-in the rarest of $q-1$ states creates at most $\lfloor q/(q-1)\rfloor=1$ frustrated bond, and the
-matching independent transversal exists by the results of Ref.~\cite{Akbari2022} (by Brooks'
-theorem $\chi\le q$, and if $\chi=q$ both conditions above hold). We checked the identity
-exhaustively for all connected graphs with $\Delta\le4$ on at most 10 vertices ($q=4$) and with
-$\Delta\le5$ on at most 8 vertices ($q=5$). The argument of Appendix~\ref{app:healing} appears to
-carry over, with odd cycles replaced by $K_q$ and even paths by $K_{q-1}$; we do not give the
-details here. For $q\ge4$, however, computing $\fr_{q-1}$ is itself NP-hard (it contains planar
-3-colourability at $\Delta=4$~\cite{GareyJohnsonStockmeyer1976}), so the structural statement
-generalises but the polynomial algorithm does not.
+the re-insertion argument of Theorem~\ref{thm:sandwich}, and the matching independent transversal
+exists by Ref.~\cite{Akbari2022}. For $q\ge4$, however, computing $\fr_{q-1}$ is itself NP-hard, so
+the structural statement generalises but the polynomial algorithm does not; we will return to this
+case elsewhere.
 
 \paragraph*{A cost is not a field.} Barahona showed that a magnetic field turns the planar Ising
 ground-state problem from polynomial into NP-hard~\cite{Barahona1982}. The third-state cost looks
