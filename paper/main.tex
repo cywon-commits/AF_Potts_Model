@@ -389,8 +389,10 @@ transversal and $\ioct(G)$ are the minimum numbers of edges, of vertices and of 
 vertices whose removal lowers $\chi$ by one. Akbari \emph{et al.} proved that the two vertex
 numbers coincide whenever $\chi\in\{\Delta,\Delta+1\}$, and that the vertex and edge numbers
 coincide whenever $\chi>\Delta/2+1$~\cite{Akbari2022}. For $\Delta=3$ the second result is that of
-Choi, Nakajima and Rim, and together the two imply Theorem~\ref{thm:healing-full}. Their argument
-is existential, based on an extremal choice of the deletion set. The chain-and-exchange proof of
+Choi, Nakajima and Rim, and together the two imply Theorem~\ref{thm:healing-full}. Their proof of
+the first result is not an algorithm: it starts from a minimum deletion set chosen, among all of
+them, with the fewest internal edges, together with an extremal colouring of the remainder, and
+argues by induction on the size of the deletion set. The chain-and-exchange proof of
 Appendix~\ref{app:healing} uses extremality only for explicitly given sets and is therefore
 algorithmic (Proposition~\ref{prop:constructive}, Corollary~\ref{cor:one-ground-state}). The
 condition $\chi>\Delta/2+1$ is the condition $\lfloor\Delta/(\chi-1)\rfloor\le1$ of the
