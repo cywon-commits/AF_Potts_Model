@@ -561,8 +561,10 @@ can be taken independent cannot be weakened~\cite{Cambie2024}.
 $\Delta\le q$ and no component is $K_{q+1}$, then $\OPT(D_q)=\min(D_q,1)\,\fr_{q-1}(G)$, where
 $\fr_{q-1}$ is the minimum number of monochromatic bonds of a $(q-1)$-colouring. The lower bound is
 the re-insertion argument of Theorem~\ref{thm:sandwich}, and the matching independent transversal
-exists by Ref.~\cite{Akbari2022}. For $q\ge4$, however, computing $\fr_{q-1}$ is itself NP-hard, so
-the structural statement generalises but the polynomial algorithm does not.
+exists by Ref.~\cite{Akbari2022}. For $q=4$, however, computing $\fr_3$ is NP-hard already on planar
+lattices, since deciding $\fr_3=0$ is planar 3-colourability at maximum degree
+four~\cite{GareyJohnsonStockmeyer1976}; the structural statement generalises but the polynomial
+algorithm does not.
 
 \paragraph*{A cost is not a field.} Barahona showed that a magnetic field turns the planar Ising
 ground-state problem from polynomial into NP-hard~\cite{Barahona1982}. The third-state cost looks
