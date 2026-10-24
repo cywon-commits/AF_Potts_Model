@@ -2,7 +2,7 @@
 
 Code and data for
 
-> J. Choi, S. Yoo, C. Kim, H. Y. Kim, and C. Won,
+> J. Choi, S. Yoo, C. Kim, H. Y. Kwon, and C. Won,
 > *Coordination three heals, coordination four is hard: the antiferromagnetic Potts model with a costly third state.*
 
 The model is the antiferromagnetic three-state Potts model with an on-site energy cost $D_3$ for
