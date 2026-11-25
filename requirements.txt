@@ -3,3 +3,4 @@ networkx>=3.5
 numpy>=1.24
 scipy>=1.9        # scipy.optimize.milp (HiGHS)
 matplotlib>=3.7   # paper/make_figs.py and report/ figures only
+ortools>=9.8      # cover_reduction.py (CP-SAT), Theorem 11 only

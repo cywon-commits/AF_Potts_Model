@@ -36,7 +36,7 @@ with a costly third state}
 We study the ground states of the antiferromagnetic three-state Potts model in which the third
 state carries a single-ion energy cost $D_3$, on arbitrary lattices, and show that the
 difficulty of the ground-state problem is controlled by the maximum coordination $\Delta$ alone;
-on planar lattices with $\Delta\le5$ it is classified completely.
+on planar lattices it is classified completely.
 On lattices with coordination at most three the third state heals frustrated bonds one for one:
 every graph of maximum degree three other than $K_4$ has an independent set of sites that meets
 every odd cycle and whose size equals the number $\fr$ of frustrated bonds of the Ising ground
@@ -45,8 +45,9 @@ we give a constructive proof.
 Hence $\OPT(D_3)=\min(D_3,1)\,\fr$ for all $D_3$, computable in polynomial time on planar
 lattices. In graph-theoretic terms, independent odd cycle transversal is solvable in polynomial
 time on planar subcubic graphs.
-On planar lattices with maximum coordination four, in contrast, deciding the ground-state energy is
-NP-complete for every fixed $0\le D_3<2$ and polynomial for $D_3\ge2$.
+On planar lattices with maximum coordination $\Delta\ge4$, in contrast, deciding the ground-state
+energy is NP-complete for every fixed $0\le D_3<\lfloor\Delta/2\rfloor$ and polynomial for
+$D_3\ge\lfloor\Delta/2\rfloor$.
 The boundary is set by a local principle: a site of coordination $d$ in the third state relieves
 at most $\lfloor d/2\rfloor$ frustrated bonds, so the third state is useless once
 $D_3\ge\lfloor\Delta/2\rfloor$; this threshold is sharp for every $\Delta\ge3$ and reproduces
@@ -105,7 +106,9 @@ two results of Akbari \emph{et al.} on the chromatic vertex stability number~\ci
 single Ising ground state in polynomial time (Corollary~\ref{cor:one-ground-state}).
 (ii) \emph{Coordination four is hard.} On planar lattices with $\Delta=4$ the ground-state
 problem is NP-complete for every fixed $0\le D_3<2$ (Theorem~\ref{thm:hard4}) and polynomial for
-$D_3\ge2$.
+$D_3\ge2$. More generally, for every $\Delta\ge4$ it is NP-complete for every fixed
+$0\le D_3<\lfloor\Delta/2\rfloor$ (Theorem~\ref{thm:hardk}), so the threshold of
+Theorem~\ref{thm:threshold} is the exact complexity boundary at every coordination.
 (iii) \emph{The boundary is local.} A site of coordination $d$ in the third state relieves at
 most $\lfloor d/2\rfloor$ frustrated bonds, so the third state disappears from all ground states
 once $D_3>\lfloor\Delta/2\rfloor$ (Theorem~\ref{thm:threshold}), and the bound is attained for every
@@ -119,18 +122,18 @@ isolated and, for coordination four and $1<D_3<2$, have two neighbours in each o
 followed by 2-SAT, or, without possibility of failure, by the constructive procedure of
 Appendix~\ref{app:healing}; we apply them to quasicrystalline, foam-like and defective lattices
 with thousands of sites.
-Together, (i)--(iii) classify the planar problem completely for $\Delta\le5$; only the window
-$2\le D_3<\lfloor\Delta/2\rfloor$ for $\Delta\ge6$ remains open.
+Together, (i)--(iii) classify the planar problem completely: it is polynomial for $\Delta\le3$
+and, for $\Delta\ge4$, polynomial exactly when $D_3\ge\lfloor\Delta/2\rfloor$.
 
 The paper is organised as follows. Section~\ref{sec:model} defines the model and its relation to
 the Blume--Capel antiferromagnet. Section~\ref{sec:threshold} proves the threshold law and the
 exact algorithm above threshold, and Sec.~\ref{sec:structure} the local structure below it.
-Section~\ref{sec:healing} treats coordination three and Sec.~\ref{sec:hard4} proves hardness at
-coordination four. Section~\ref{sec:lattices} applies the results to specific lattices, and
+Section~\ref{sec:healing} treats coordination three and Sec.~\ref{sec:hard4} proves hardness below
+the threshold at coordination four and above. Section~\ref{sec:lattices} applies the results to specific lattices, and
 Sec.~\ref{sec:discussion} discusses the complexity landscape and open problems.
 Appendix~\ref{app:numerics} describes the numerical methods and Appendix~\ref{app:healing} the
 proof of the healing theorem; the Supplemental Material~\cite{SM} compares our result with the
-literature on independent odd cycle transversal.
+literature on independent odd cycle transversal and completes the proof of Theorem~\ref{thm:hardk}.
 
 %=====================================================================
 \section{Model}
@@ -405,7 +408,7 @@ vertices and by exact optimisation on 1\,637 larger graphs with up to 100 vertic
 (Appendix~\ref{app:numerics}).
 
 %=====================================================================
-\section{Coordination four: hardness below the threshold}
+\section{Coordination four and above: hardness below the threshold}
 \label{sec:hard4}
 \begin{theorem}[hardness at $\Delta=4$]\label{thm:hard4}
 For every fixed rational $0<D_3<2$ it is NP-complete to decide, given a planar graph $G$ of
@@ -451,6 +454,88 @@ while satisfiable formulas give equality (Appendix~\ref{app:numerics}). The gap 
 $D_3\to2$, consistent with the threshold. The same instances show hardness for $0<D_3<2$ at every
 $\Delta\ge4$.
 
+\subsection*{Higher coordination}
+For $D_3\ge2$ a state-3 site pays only where it relieves three or more frustrated bonds, and the
+instances of Theorem~\ref{thm:hard4} become trivial. The same charging argument nevertheless
+applies once a site can lie on $k$ bond-disjoint odd cycles.
+
+\begin{theorem}[hardness below the threshold]\label{thm:hardk}
+Let $k\ge3$. For every fixed rational $k-1\le D_3<k$ it is NP-complete to decide, given a planar
+graph $G$ of maximum degree $2k$ and a number $K$, whether $\OPT(D_3)\le K$. Consequently, for every
+$\Delta\ge4$ the problem on planar graphs of maximum degree at most $\Delta$ is NP-complete for
+every fixed rational $0\le D_3<\lfloor\Delta/2\rfloor$ and polynomial for
+$D_3\ge\lfloor\Delta/2\rfloor$.
+\end{theorem}
+The second statement follows from the first: $D_3=0$ is planar
+3-colourability~\cite{GareyJohnsonStockmeyer1976}, $0<D_3<2$ is Theorem~\ref{thm:hard4}, a value
+$j-1\le D_3<j$ with $3\le j\le\lfloor\Delta/2\rfloor$ is covered by $k=j$, whose graphs have maximum
+degree $2j\le\Delta$, and $D_3\ge\lfloor\Delta/2\rfloor$ is Theorem~\ref{thm:threshold}.
+
+\begin{figure*}
+\includegraphics[width=0.95\textwidth]{figs/fig_gadget}
+\caption{The reduction of Theorem~\ref{thm:hardk} for $k=3$ ($\Delta=6$). (a),(b) Variable
+gadget: the cube graph with one site removed (large symbols; ports and hub on side A, three sites
+on side B), each of its nine bonds completed to a triangle by a private site (small symbols).
+Dashed bonds belong to the clause triangles, which join one port of each of three variables. In
+(a) the variable is true and side A is in state 3; in (b) it is false and side B is in state 3. In
+both cases every gadget triangle contains exactly one state-3 site; the clause triangles at the
+ports are covered only in (a). (c) Exact $\OPT-K$ for instances with six variables. For
+unsatisfiable instances the gap is $\min(2,k-D_3)$ and closes at the threshold $D_3=k$; for
+satisfiable instances $\OPT=K$. Bars mark the window $k-1\le D_3<k$ of Theorem~\ref{thm:hardk}.}
+\label{fig:gadget}
+\end{figure*}
+
+\begin{proof}[Proof for $k=3$]
+The problem is in NP. We reduce from planar monotone 1-in-3 satisfiability with exactly three
+occurrences of every variable: given clauses of three variables without negations, such that
+every variable occurs in exactly three clauses and the variable--clause incidence graph is planar,
+decide whether some assignment makes exactly one variable of every clause true. This problem is
+NP-complete (Moore and Robson~\cite{MooreRobson2001}, Sec.~3). A formula with $n$ variables has
+$n$ clauses, and a satisfying assignment has exactly $n/3$ true variables.
+
+For each variable take the cube graph with one site removed (Fig.~\ref{fig:gadget}). It is a
+connected bipartite graph with nine bonds; side A consists of three \emph{ports}, the neighbours of
+the removed site, and a \emph{hub}, and side B of three sites. Complete each of the nine bonds to
+a triangle with a private site of degree two. For each clause add a triangle on one port of each
+of its variables, every port being used by one clause; the ports of a variable are assigned in the
+cyclic order of its clauses in a planar drawing of the formula. The resulting graph $G_\varphi$ is
+planar, since the ports lie on the outer hexagon of the gadget. It has $16n$ sites and maximum
+degree six, and its $10n$ triangles are bond-disjoint and cover all bonds. A site of a gadget
+other than a private site lies on three triangles, a private site on one.
+
+Set $K=10nD_3/3$. Distribute the energy of any configuration over the triangles: each triangle
+receives its own frustrated bonds and $D_3/c(v)$ from each of its state-3 sites $v$, where
+$c(v)\le3$ is the number of triangles through $v$. A triangle without state 3 has a frustrated
+bond and receives at least 1; any other receives at least $D_3/3$. Since $D_3<3$,
+$E(s)\ge10nD_3/3=K$, with equality only if every triangle contains exactly one state-3 site, that
+site lies on three triangles, and nothing else costs energy. Then no private site is in state 3,
+so each gadget triangle has exactly one of its two other sites in state 3. As the gadget is
+connected and bipartite, its state-3 sites are exactly one side, A (true) or B (false). Each clause
+triangle then contains exactly one port of a true variable, and the assignment is 1-in-3
+satisfying.
+
+Conversely, for a satisfying assignment put side A of the true and side B of the false variables
+in state 3. These sites are pairwise non-adjacent, because each clause triangle contains one true
+port. The remaining graph is a forest: around a true variable only stars of private sites remain,
+and a port of a false variable keeps, besides private sites, the single clause bond to the other
+false port of its clause. Two-colouring the forest gives energy $D_3(4n/3+3\cdot2n/3)=K$.
+\end{proof}
+This argument holds for all $0<D_3<3$ and so includes the window $2\le D_3<3$ required for $k=3$.
+
+\emph{General $k$.} Replace the bonds of the gadget by bond-disjoint odd cycles through the same
+two sites: one between the hub and each site of side B, and $\lceil(k-1)/2\rceil$ and
+$\lfloor(k-1)/2\rfloor$ alternately around the hexagon. Attach $k-3$ private triangles (pads) to
+the hub and keep the clause triangles. Every site of the original gadget then lies on $k$ cycles
+and has degree $2k$. When side B is in state 3 the pads remain frustrated; since a satisfying
+assignment has exactly $2n/3$ false variables, the criterion becomes $K=(n/3)(10D_3+2k-6)$. The
+proof that $\OPT\ge K$, with equality only for satisfying assignments, combines the charging
+argument with a case analysis of one gadget and is given in the Supplemental Material~\cite{SM}.
+Exact solutions for $k=3,4,5$ confirm the criterion (Appendix~\ref{app:numerics}).
+
+In the window $k-1\le D_3<k$ the third state pays only where it relieves $k$ frustrated bonds at
+once. The ground-state problem then asks for sites that cover every odd cycle exactly once, an
+exact-cover problem, which is the source of the hardness.
+
 %=====================================================================
 \section{Lattices}
 \label{sec:lattices}
@@ -460,7 +545,10 @@ $2N$ triangles), and the Wannier states attain $N$~\cite{Wannier1950}. The three
 configuration has energy $ND_3/3$. The ground state therefore changes at $D_3^*=3=\lfloor6/2\rfloor$
 by a level crossing, in agreement with the Blume--Capel
 result~\cite{Zukovic2013} ($D=0$ in Eq.~\eqref{eq:BC}). The triangular lattice is thus an extremal lattice for
-Theorem~\ref{thm:threshold}. The two competing states are shown in Fig.~\ref{fig:triangular}.
+Theorem~\ref{thm:threshold}. By Theorem~\ref{thm:hardk} it is also the point where the
+complexity changes for graphs of coordination six: the three-sublattice state is the periodic
+instance of the exact covers used in its proof, in which every state-3 site relieves three
+frustrated bonds. The two competing states are shown in Fig.~\ref{fig:triangular}.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{figs/fig_triangular}
@@ -545,11 +633,13 @@ certified in 3--35\,s (Table~\ref{tab:timing}, Fig.~\ref{fig:timing}).
 \paragraph*{Complexity landscape.} On planar lattices the ground-state problem is polynomial for
 $D_3\ge\lfloor\Delta/2\rfloor$ (Theorem~\ref{thm:threshold}). For $\Delta\le3$ it is polynomial for
 every $D_3$ (Theorem~\ref{thm:healing-full}; at $D_3=0$ this is Brooks' theorem~\cite{Brooks1941}).
-For $\Delta=4,5$ it is NP-complete for $0\le D_3<2$ (planar 3-colourability~\cite{GareyJohnsonStockmeyer1976}
-and Theorem~\ref{thm:hard4}) and polynomial for $D_3\ge2$. Coordination three and four thus sit on
-opposite sides, and the threshold $\lfloor\Delta/2\rfloor$ is the exact complexity boundary for
-$\Delta\le5$. At coordination three healing makes the problem easy; at coordination four it does
-not, because a state-3 site can relieve two bonds and the choice of which sites to use carries
+For every $\Delta\ge4$ it is NP-complete for $0\le D_3<\lfloor\Delta/2\rfloor$ (planar
+3-colourability~\cite{GareyJohnsonStockmeyer1976}, Theorem~\ref{thm:hard4} and
+Theorem~\ref{thm:hardk}). Coordination three and four thus sit on
+opposite sides, and the threshold $\lfloor\Delta/2\rfloor$ is the exact complexity boundary at
+every coordination. At coordination three healing makes the problem easy; above it a state-3 site
+can relieve several bonds at once, and in the window $k-1\le D_3<k$ it pays only where it relieves
+exactly $k$. The choice of sites is then an exact-cover problem, and this choice carries the
 information. The independence of state-3 sites, forced below the threshold by
 Theorem~\ref{thm:local}, also has a cost at coordination four: there are infinitely many graphs
 with $\Delta=4$ and $\chi=3$ for which the smallest independent set whose removal leaves a
@@ -587,9 +677,15 @@ the planarity of the constructed graphs. See the Supplemental Material~\cite{SM}
 comparison, including explicit instances.
 
 \paragraph*{Open problems.} (1) The constructive procedure (Proposition~\ref{prop:constructive},
-Corollary~\ref{cor:one-ground-state}) needed at most three chain stages in all our tests; is the
-chain length bounded by a constant? (2) Decide the complexity of the window
-$2\le D_3<\lfloor\Delta/2\rfloor$ for $\Delta\ge6$, e.g.\ on subgraphs of the triangular lattice.
+Corollary~\ref{cor:one-ground-state}) needed at most three chain stages in all our tests. The
+chain length is nevertheless not bounded by a constant: Ma and Zhang~\cite{MaZhang2026}
+constructed outerplanar graphs of maximum degree three with $9\cdot2^h-6$ sites that contain a
+stuck tight set from which exactly $h$ exchanges are needed, for every $h\ge1$. Their examples
+start from a prescribed stuck set. Is the chain length bounded when the greedy step may choose its
+sites, and does it grow at most logarithmically with the number of sites in general?
+(2) Theorem~\ref{thm:hardk} uses graphs in which bonds are chosen freely. Decide the complexity
+below the threshold for site-diluted (induced) subgraphs of the triangular lattice, where a site
+of coordination six lies in six triangles rather than three.
 (3) Do the intermediate kinks of the Penrose face-adjacency graph survive in the thermodynamic
 limit? (4) Finite temperature: the rigid local structure of
 Theorem~\ref{thm:local} suggests constrained low-energy excitations below the threshold.
@@ -696,7 +792,12 @@ Proposition~\ref{prop:constructive} resolves them. Exact optimisation on 251 fur
 Ref.~\cite{Johnson2025}) and on 1\,386 graphs with 16--100 vertices (729 of them planar) gave
 $\ioct=\fr$ in every case. For Theorem~\ref{thm:hard4}, 307 planar 3-SAT formulas
 gave planar $G_\varphi$ under the ordering rule, and the energy criterion was confirmed by exact
-optimisation on satisfiable and unsatisfiable instances.
+optimisation on satisfiable and unsatisfiable instances. For Theorem~\ref{thm:hardk} the criterion
+$\OPT=K$ if and only if the formula is satisfiable was confirmed by exact optimisation (CP-SAT) at
+$D_3=k-1$ and $k-1/2$: on four planar instances with 4--12 variables for $k=3,4$ (up to 324 sites),
+and on random instances with 3--9 variables, 48 (12 unsatisfiable) for $k=3$, 24 (2 unsatisfiable) for $k=4$ and 10 (1 unsatisfiable) for $k=5$, without
+exception. For unsatisfiable instances with six variables $\OPT-K=\min(2,k-D_3)$ on
+$1\le D_3\le k$ [Fig.~\ref{fig:gadget}(c)].
 \paragraph*{Penrose patches.} Patches of the Penrose face-adjacency graph were generated by the
 de Bruijn pentagrid method~\cite{deBruijn1981} with random phason offsets; exact energy curves
 were computed on $0\le D_3\le3$ for patches of 97--248 rhombi.

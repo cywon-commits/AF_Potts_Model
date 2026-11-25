@@ -296,6 +296,145 @@ statistics and Kuratowski subgraphs; output \texttt{supp\_runs/planarity\_eviden
 \item \texttt{cd paper \&\& python3 make\_supp\_figs.py}: Fig.~\ref{fig:S-minor}.
 \end{itemize}
 
+\section*{Note B. Proof of Theorem~11 of the main text for general coordination}
+
+Theorem~11 of the main text states that for $k\ge3$ and every fixed rational $k-1\le D_3<k$ it is
+NP-complete to decide, for a planar graph $G$ of maximum degree $2k$ and a number $K$, whether
+$E_0(D_3)\le K$. The main text proves the case $k=3$. Here we give the construction and the proof
+for general $k$; for $k=3$ they reduce to those of the main text. The energy of a configuration $s$
+is $E(s)$, the number of frustrated (monochromatic) bonds plus $D_3$ times the number of state-3
+sites, and $E_0$ is its minimum.
+
+\subsection*{B.1 Construction}
+
+The source problem is planar monotone 1-in-3 satisfiability in which every variable occurs in
+exactly three clauses and every clause contains three distinct variables~\cite{MooreRobson2001}.
+A formula $\varphi$ with $n$ variables has $n$ clauses, and every satisfying assignment has exactly
+$n/3$ true and $2n/3$ false variables, since each clause contains one true variable and each
+variable lies in three clauses.
+
+Let $\alpha=\lceil(k-1)/2\rceil$, $\beta=\lfloor(k-1)/2\rfloor$ and $q=k-3$. For each variable $x$
+the gadget has seven \emph{core} sites: the ports $p_1,p_2,p_3$ and the hub $a$, forming side
+$A_x$, and $b_1,b_2,b_3$, forming side $B_x$. All other sites of the gadget are \emph{private}
+sites of degree two. The gadget consists of the following odd cycles, which pairwise share no
+bond.
+\begin{itemize}
+\item \emph{Q-cycles}, each through exactly one site of $A_x$ and one of $B_x$ and otherwise through
+private sites: one for each pair $(a,b_j)$, $\alpha$ for each pair $(p_j,b_j)$ and $\beta$ for each
+pair $(b_j,p_{j+1})$, $j=1,2,3$ (indices modulo 3). The first cycle of a pair $(u,v)$ is the
+triangle $u\,v\,d$; every further one is a 5-cycle $u\,d_1\,v\,d_2\,d_3$, so that the graph is simple.
+\item \emph{Pads}: $q$ triangles $a\,e_1\,e_2$ through the hub.
+\end{itemize}
+For each clause a \emph{clause triangle} joins one port of each of its three variables; every port
+is used by exactly one clause, and the three ports of a variable are assigned in the cyclic order
+of its clauses in a planar drawing of the variable--clause incidence graph.
+
+Every core site lies on exactly $k$ cycles: a port on $\alpha+\beta=k-1$ Q-cycles and one clause
+triangle, $b_j$ on $1+\alpha+\beta=k$ Q-cycles, and the hub on three Q-cycles and $q$ pads. Core
+sites therefore have degree $2k$ and private sites degree two. A gadget has $3k$ Q-cycles and $q$
+pads. Let $\mathcal C$ be the family of all Q-cycles, pads and clause triangles. Its members are
+odd, pairwise bond-disjoint, and cover all bonds of the graph $G_\varphi$. The graph is planar: the
+Q-cycles of a pair are parallel paths, the ports lie on the outer boundary of the gadget in their
+cyclic order, and replacing a clause vertex by a triangle preserves planarity. Set
+\begin{equation}
+K=\frac n3\,(10D_3+2k-6).
+\end{equation}
+
+\subsection*{B.2 Lower bound}
+
+Let $s$ be any configuration and distribute $E(s)$ over $\mathcal C$: a cycle receives its own
+frustrated bonds, the full $D_3$ of each of its private sites in state 3, and $D_3/k$ from each of
+its core sites in state 3. Since the cycles are bond-disjoint and a core site lies on $k$ of them,
+the shares add up to at most $E(s)$. Let $j(C)$ be the number of state-3 core sites on $C$. If
+$j(C)=0$, then either $C$ contains no state-3 site, and being odd it has a frustrated bond, or a
+private site of $C$ is in state 3; in both cases its share is at least $1$, because
+$D_3\ge k-1\ge1$. Hence
+\begin{equation}\label{eq:S-charge}
+E(s)\ \ge\ \sum_{C\in\mathcal C}\phi\bigl(j(C)\bigr),\qquad \phi(0)=1,\quad
+\phi(j)=j\,\frac{D_3}{k}\ \ (j\ge1).
+\end{equation}
+Write $\delta=1-D_3/k$, so that $0<\delta\le1/k$, $\phi(0)=D_3/k+\delta$ and
+$\phi(2)=D_3/k+(1-\delta)$.
+
+\begin{lemma}[one gadget]\label{lem:S-gadget}
+Let $S_x$ be the set of state-3 core sites of the gadget of $x$ and $p_x$ the number of ports in
+$S_x$. Then
+\begin{equation}\label{eq:S-gadget}
+\sum_{C\text{ in the gadget of }x}\phi\bigl(j(C)\bigr)\ \ge\ (4k-3)\frac{D_3}{k}
++\delta\,q\Bigl(1-\frac{p_x}{3}\Bigr),
+\end{equation}
+with equality only if $S_x=A_x$ or $S_x=B_x$.
+\end{lemma}
+\begin{proof}
+A Q-cycle has two core sites and a pad one. The left-hand side minus $(4k-3)D_3/k$ is therefore
+\[
+X=\delta\,U+(1-\delta)\,W+\delta\,q\,[a\notin S_x],
+\]
+where $U$ is the number of Q-cycles with no core site in $S_x$ and $W$ the number with both.
+(i) If $a\notin S_x$, then $X\ge\delta q\ge\delta q(1-p_x/3)$. Equality requires $U=W=0$; then every
+$b_j$ is in $S_x$, because of the Q-cycle through $a$ and $b_j$, and no port is, because every
+port shares a Q-cycle with some $b_j$. Hence $S_x=B_x$.
+(ii) If $a\in S_x$ and no $b_j$ is in $S_x$, the $k-1$ Q-cycles through each port outside $S_x$
+are uncovered, so $X=\delta(3-p_x)(k-1)\ge\delta(k-3)(3-p_x)/3$, with equality only for $p_x=3$,
+that is, $S_x=A_x$.
+(iii) If $a\in S_x$ and some $b_j\in S_x$, the Q-cycle through $a$ and $b_j$ gives
+$X\ge1-\delta\ge(k-1)/k>(k-3)/k\ge\delta q\ge\delta q(1-p_x/3)$.
+\end{proof}
+
+\begin{proposition}\label{prop:S-bound}
+For $k-1\le D_3<k$ every configuration of $G_\varphi$ has $E(s)\ge K$. If $E(s)=K$, then $\varphi$
+is 1-in-3 satisfiable.
+\end{proposition}
+\begin{proof}
+Every port lies on exactly one clause triangle, so $\sum_xp_x=\sum_cj(c)$, the sum on the right
+running over the clause triangles. Summing Eq.~\eqref{eq:S-gadget} over the variables and inserting
+it into Eq.~\eqref{eq:S-charge} gives
+\begin{equation}
+E(s)\ \ge\ n(4k-3)\frac{D_3}{k}+\delta qn+\sum_cg\bigl(j(c)\bigr),\qquad
+g(j)=\phi(j)-\frac{\delta q}{3}\,j .
+\end{equation}
+Here $g(0)=1$ and $g(j)=j(1-\delta k/3)$ for $j\ge1$. Since $0<\delta k/3\le1/3$, $g$ attains its
+minimum $1-\delta k/3$ only at $j=1$. With $D_3/k=1-\delta$,
+\[
+E(s)\ \ge\ n\Bigl[(4k-3)(1-\delta)+\delta(k-3)+1-\frac{\delta k}{3}\Bigr]
+=n\Bigl[4k-2-\frac{10k}{3}\delta\Bigr]=\frac n3(10D_3+2k-6)=K.
+\]
+If $E(s)=K$, equality holds in Lemma~\ref{lem:S-gadget} for every variable, so $S_x=A_x$ or
+$S_x=B_x$, and $j(c)=1$ for every clause triangle. Calling $x$ true if $S_x=A_x$, every clause
+contains exactly one true variable.
+\end{proof}
+The bound uses neither planarity nor the independence of the state-3 sites.
+
+\subsection*{B.3 Attainment}
+
+\begin{proposition}\label{prop:S-attain}
+If $\varphi$ is 1-in-3 satisfiable, then $E_0(D_3)\le K$.
+\end{proposition}
+\begin{proof}
+Take a satisfying assignment and let $S$ be the union of the sets $A_x$ of the true and $B_x$ of
+the false variables. Put $S$ in state 3. No two sites of $S$ are adjacent: inside a gadget only
+one side is used, and a clause triangle contains exactly one true port. Removing $S$ breaks every
+Q-cycle into paths attached to the remaining core sites, and leaves of each clause triangle the
+single bond between its two false ports. The remaining graph therefore consists of trees together
+with the $q$ pads at the hub of each false variable, which are triangles attached at a single
+site. Two-colour it with one frustrated bond in each pad. The energy is
+$D_3\bigl(4\cdot\tfrac n3+3\cdot\tfrac{2n}3\bigr)+q\cdot\tfrac{2n}3=K$.
+\end{proof}
+
+Propositions~\ref{prop:S-bound} and~\ref{prop:S-attain} show that $E_0(D_3)\le K$ if and only if
+$\varphi$ is satisfiable. The graph $G_\varphi$ has $O(kn)$ sites and is constructed in polynomial
+time, the problem is in NP, and the source problem is NP-complete~\cite{MooreRobson2001}. This
+proves Theorem~11 of the main text.
+
+\subsection*{B.4 Numerical checks}
+
+The script \texttt{cover\_reduction.py} of the repository~\cite{AFPottsRepo} builds $G_\varphi$ and
+computes $E_0$ exactly (CP-SAT with a proof of optimality); \texttt{cover\_unsat\_k3.py} samples
+unsatisfiable instances. In all instances $E_0\ge K$, with equality exactly for the satisfiable
+formulas (main text, Appendix~A). For unsatisfiable formulas with six variables we find
+$E_0-K=\min(2,k-D_3)$ for $1\le D_3\le k$ and $k=3,4,5$, so that the equivalence appears to hold in
+a wider range of $D_3$ than the window used in the theorem.
+
 \bibliography{refs}
 
 \end{document}

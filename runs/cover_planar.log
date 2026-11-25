@@ -1,0 +1,8 @@
+cube             k=3 n=4 N=64 planar=True sat=False | D3=2: E0-K=1/3 | D3=5/2: E0-K=1/6 | D3=14/5: E0-K=1/15
+cube             k=4 n=4 N=108 planar=True sat=False | D3=3: E0-K=1/3 | D3=7/2: E0-K=1/6 | D3=19/5: E0-K=1/15
+hexagonal prism  k=3 n=6 N=96 planar=True sat=True | D3=2: E0-K=0 | D3=5/2: E0-K=0 | D3=14/5: E0-K=0
+hexagonal prism  k=4 n=6 N=162 planar=True sat=True | D3=3: E0-K=0 | D3=7/2: E0-K=0 | D3=19/5: E0-K=0
+octagonal prism  k=3 n=8 N=128 planar=True sat=False | D3=2: E0-K=2/3 | D3=5/2: E0-K=1/3 | D3=14/5: E0-K=2/15
+octagonal prism  k=4 n=8 N=216 planar=True sat=False | D3=3: E0-K=2/3 | D3=7/2: E0-K=1/3 | D3=19/5: E0-K=2/15
+12-prism         k=3 n=12 N=192 planar=True sat=True | D3=2: E0-K=0 | D3=5/2: E0-K=0 | D3=14/5: E0-K=0
+12-prism         k=4 n=12 N=324 planar=True sat=True | D3=3: E0-K=0 | D3=7/2: E0-K=0 | D3=19/5: E0-K=0
